@@ -1,3 +1,7 @@
+const mongoose = require("mongoose");
+const TargetSchema = require("../models/Target");
+const TargetModel = mongoose.model("Target", TargetSchema);
+
 const TargetService = {
   getAll: () => {
     let targetList = [
@@ -13,9 +17,24 @@ const TargetService = {
       foo: "bar"
     }
   },
-  createTarget: (targetInformation) => {
-    return { // Returns the created target if successful, error if not.
+  createTarget: async (targetInformation) => {
+    try {
+      const targetModel = new TargetModel(targetInformation);
+      let createdTarget = await targetModel.save();
+      return createdTarget;
+    } catch(error) {
+      console.log("Error creating target");
+    }
+  },
+  updateTarget: (targetInformation) => {
+    return {
       foo: "bar"
+    }
+  },
+  deleteTarget: (targetId) => {
+    // Delete target by id.
+    return {
+      status: "ok"
     }
   }
 };

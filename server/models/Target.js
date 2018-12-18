@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import CompanyInformation from "./CompanyInformation";
-import ContactInformation from "./ContactInformation";
+const mongoose = require("mongoose");
+const CompanyInformation = require("./CompanyInformation");
+const ContactInformation = require("./ContactInformation");
 
 let Schema = mongoose.Schema;
 
@@ -20,4 +20,4 @@ const targetSchema = new Schema({
   }
 });
 
-export default targetSchema;
+module.exports = targetSchema;

@@ -1,4 +1,3 @@
-
 const mongoose = require("mongoose");
 const AddressSchema = require("../models/Address");
 const AddressModel = mongoose.model('Address', AddressSchema);

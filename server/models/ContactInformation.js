@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
-import CompanyInformation from "./CompanyInformation";
-import Address from "./Address";
+const mongoose = require("mongoose");
+const CompanyInformation = require("./CompanyInformation");
+const Address = require("./Address");
 
 let Schema = mongoose.Schema;
 
@@ -18,4 +18,4 @@ const contactInformationSchema = new Schema({
   birthday: Date
 });
 
-export default contactInformationSchema;
+module.exports = contactInformationSchema;
