@@ -3,38 +3,40 @@ const ContactInformationSchema = require("../models/ContactInformation");
 const ContactInformationModel = mongoose.model("ContactInformation", ContactInformationSchema);
 
 const ContactInformationService = {
-  getAll: () => {
-    let targetList = [
-      {
-        foo: "bar"
-      }
-    ];
-
-    return targetList;
+  getAll: async () => {
+    try {
+      return await ContactInformationModel.find({});
+    } catch (error) {
+      throw error;
+    }
   },
-  getById: (id) => {
-    return {
-      foo: "bar"
+  getById: async (id) => {
+    try {
+      return await ContactInformationModel.findOne({_id: id});
+    } catch(error) {
+      return error;
     }
   },
   createContactInformation: async (contactInformation) => {
     try {
       const contactInformationModel = new ContactInformationModel(contactInformation);
-      let createdContactInformation = await contactInformationModel.save();
-      return createdContactInformation;
+      return await contactInformationModel.save();
     } catch(error) {
-      console.log("Error saving contact information: ", error);
+      throw error;
     }
   },
-  updateContactInformation: (contactInformation) => {
-    return {
-      foo: "bar"
-    };
+  updateContactInformation: async (contactInformationId, contactInformation) => {
+    try {
+      return await ContactInformationModel.findOneAndUpdate({_id: contactInformationId }, contactInformation)
+    } catch(error) {
+      throw error;
+    }
   },
-  deleteContactInformation: (contactInformationId) => {
-    // Delete contact information by id.
-    return {
-      status: "ok"
+  deleteContactInformation: async (contactInformationId) => {
+    try {
+      return await ContactInformationModel.deleteOne({_id: contactInformationId})
+    } catch(error) {
+      throw error;
     }
   }
 };

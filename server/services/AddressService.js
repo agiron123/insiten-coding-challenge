@@ -3,43 +3,40 @@ const AddressSchema = require("../models/Address");
 const AddressModel = mongoose.model('Address', AddressSchema);
 
 const AddressService = {
-  getAll: () => {
-
-    let addressList = [
-      {
-        streetLine1: "123 Main St.",
-        streetLine2: "Unit 456",
-        city: "Atlanta",
-        state: "GA",
-        zip: 12345
-      }
-    ];
-
-    return addressList;
+  getAll: async () => {
+    try {
+      return await AddressModel.find({});
+    } catch (error) {
+      throw error;
+    }
   },
-  getById: (id) => {
-    return {
-      foo: "bar"
+  getById: async (id) => {
+    try {
+      return await AddressModel.findOne({_id: id});
+    } catch(error) {
+      return error;
     }
   },
   createAddress: async (addressInformation) => {
     try {
       const addressModel = new AddressModel(addressInformation);
-      let createdAddress = await addressModel.save()
-      return createdAddress;
+      return await addressModel.save();
     } catch(error) {
-      console.log("Error creating address.");
+      throw error;
     }
   },
-  updateAddress: (addressInformation) => {
-    return { // Updates the current address
-      foo: "bar"
+  updateAddress: async (addressId, addressInformation) => {
+    try {
+      return await AddressModel.findOneAndUpdate({_id: addressId }, addressInformation)
+    } catch(error) {
+      throw error;
     }
   },
-  deleteAddress: (addressId) => {
-    // Delete an address by id.
-    return {
-      status: "ok"
+  deleteAddress: async (addressId) => {
+    try {
+      return await AddressModel.deleteOne({_id: addressId})
+    } catch(error) {
+      throw error;
     }
   }
 };

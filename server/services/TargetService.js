@@ -3,38 +3,41 @@ const TargetSchema = require("../models/Target");
 const TargetModel = mongoose.model("Target", TargetSchema);
 
 const TargetService = {
-  getAll: () => {
-    let targetList = [
-      {
-        foo: "bar"
-      }
-    ];
-
-    return targetList;
+  getAll: async () => {
+    try {
+      return await TargetModel.find({});
+    } catch (error) {
+      throw error;
+    }
   },
-  getById: (id) => {
-    return {
-      foo: "bar"
+  getById: async (id) => {
+    try {
+      return await TargetModel.findById(id);
+    } catch (error) {
+      throw error;
     }
   },
   createTarget: async (targetInformation) => {
     try {
       const targetModel = new TargetModel(targetInformation);
-      let createdTarget = await targetModel.save();
-      return createdTarget;
+      return await targetModel.save();
     } catch(error) {
       console.log("Error creating target");
+      throw error;
     }
   },
-  updateTarget: (targetInformation) => {
-    return {
-      foo: "bar"
+  updateTarget: async (targetId, targetInformation) => {
+    try {
+      return await TargetModel.findOneAndUpdate({_id: targetId}, targetInformation)
+    } catch(error) {
+      throw error; 
     }
   },
-  deleteTarget: (targetId) => {
-    // Delete target by id.
-    return {
-      status: "ok"
+  deleteTarget: async (targetId) => {
+    try {
+      return await TargetModel.deleteOne({ _id: targetId})
+    } catch(error) {
+      throw error;
     }
   }
 };
