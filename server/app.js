@@ -104,7 +104,7 @@ app.post("/api/company-information/", async function(req, res) {
   }
 });
 
-app.put("/api/company-information/:companyInfoId", async function(req, res) {
+app.put("/api/company-information/:companyInfoId/", async function(req, res) {
   try {
     let updatedCompanyInformation = await CompanyInformationService.updateCompanyInformation(req.params.companyInfoId, req.body);
     res.json(updatedCompanyInformation);
@@ -118,7 +118,7 @@ app.put("/api/company-information/:companyInfoId", async function(req, res) {
   }
 });
 
-app.delete("/api/company-information/:companyInfoId", async function(req, res) {
+app.delete("/api/company-information/:companyInfoId/", async function(req, res) {
   try {
     let deletedCompanyInformation = await CompanyInformationService.deleteCompanyInformation(req.params.companyInfoId);
     res.json(deletedCompanyInformation);

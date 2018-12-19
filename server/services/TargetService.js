@@ -22,7 +22,6 @@ const TargetService = {
       const targetModel = new TargetModel(targetInformation);
       return await targetModel.save();
     } catch(error) {
-      console.log("Error creating target");
       throw error;
     }
   },
